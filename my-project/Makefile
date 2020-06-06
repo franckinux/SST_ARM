@@ -1,9 +1,10 @@
-PROJECT = blink
+PROJECT = sst
 BUILD_DIR = bin
 
-SHARED_DIR = ../my-common-code
+SHARED_DIR = ../my-common-code ../sst
 CFILES = my-project.c
 CFILES += api.c
+CFILES += sst.c sst_port.c
 AFILES += api-asm.S
 
 CFLAGS += -DRCC_LED1=RCC_GPIOC -DPORT_LED1=GPIOC -DPIN_LED1=GPIO13 -DLITTLE_BIT=200000
