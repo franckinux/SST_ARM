@@ -2,6 +2,7 @@
 bin/
 *.elf
 *.bin
+*.map
 generated.*.ld
 tags*
 libopencm3
