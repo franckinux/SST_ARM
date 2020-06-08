@@ -22,7 +22,7 @@
 // #define SST_INT_UNLOCK() __enable_irq()
 #define SST_INT_LOCK()
 #define SST_INT_UNLOCK()
-																					/*SST End of Interrupt Command*/
+                                          /*SST End of Interrupt Command*/
 
                                                /* maximum SST task priority */
 #define SST_MAX_PRIO     8

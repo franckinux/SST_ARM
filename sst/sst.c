@@ -62,7 +62,7 @@ void SST_run(void) {
 
     while(1){                                         /* the SST idle loop */
         SST_onIdle();                        /* invoke the on-idle callback */
-			  SST_schedule_();
+        SST_schedule_();
     }
 }
 /*..........................................................................*/

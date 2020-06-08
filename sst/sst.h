@@ -56,8 +56,8 @@ void SST_schedule_(void);
 #define SST_ISR_EXIT(pin_, exit_command_) do { \
     SST_INT_LOCK(); \
     SST_currPrio_ = (pin_); \
-	  SST_INT_UNLOCK(); \
-		(exit_command_); \
+    SST_INT_UNLOCK(); \
+    (exit_command_); \
 } while (0)
 
 
