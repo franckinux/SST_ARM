@@ -2,12 +2,12 @@ PROJECT = sst
 BUILD_DIR = bin
 
 SHARED_DIR = ../my-common-code ../sst
-CFILES = main.c mytask.c sst_user.c
+CFILES = main.c mytask.c interrupts.c sst_user.c
 CFILES += api.c
 CFILES += sst.c sst_port.c
 AFILES += api-asm.S
 
-CFLAGS += -DRCC_LED1=RCC_GPIOC -DPORT_LED1=GPIOC -DPIN_LED1=GPIO13 -DLITTLE_BIT=1600000
+CFLAGS += -DRCC_LED1=RCC_GPIOC -DPORT_LED1=GPIOC -DPIN_LED1=GPIO13
 LDFLAGS += -Wl,-Map,$(PROJECT).map
 
 # TODO - you will need to edit these two lines!
