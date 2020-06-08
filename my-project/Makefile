@@ -2,7 +2,7 @@ PROJECT = sst
 BUILD_DIR = bin
 
 SHARED_DIR = ../my-common-code ../sst
-CFILES = my-project.c
+CFILES = main.c mytask.c sst_user.c
 CFILES += api.c
 CFILES += sst.c sst_port.c
 AFILES += api-asm.S
