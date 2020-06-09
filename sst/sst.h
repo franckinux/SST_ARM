@@ -19,6 +19,9 @@
 
 #include <stdint.h>                 /* exact-width integer types, ANSI C'99 */
 
+#define SST_MAX_PRIO 8  /* maximum SST task priority */
+#define SST_ISR_BASE_PRIO (SST_MAX_PRIO + 1)  /* base SST isr task priority */
+
 typedef uint8_t SSTSignal;
 typedef uint8_t SSTParam;
 
@@ -56,6 +59,7 @@ void SST_schedule_(void);
 #define SST_ISR_EXIT(pin_, exit_command_) do { \
     SST_INT_LOCK(); \
     SST_currPrio_ = (pin_); \
+    SST_schedule_(); \
     SST_INT_UNLOCK(); \
     (exit_command_); \
 } while (0)

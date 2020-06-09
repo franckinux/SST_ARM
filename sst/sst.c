@@ -14,6 +14,7 @@
 * Email:    miro@quantum-leaps.com
 * Internet: www.quantum-leaps.com
 *****************************************************************************/
+#include "sst.h"
 #include "sst_port.h"
 
 /* Public-scope objects ----------------------------------------------------*/
@@ -60,9 +61,8 @@ void SST_run(void) {
     SST_schedule_();                  /* process all events produced so far */
     SST_INT_UNLOCK();
 
-    while(1){                                         /* the SST idle loop */
+    while(1){                                          /* the SST idle loop */
         SST_onIdle();                        /* invoke the on-idle callback */
-        SST_schedule_();
     }
 }
 /*..........................................................................*/

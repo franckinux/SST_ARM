@@ -17,19 +17,11 @@
 #ifndef sst_port_h
 #define sst_port_h
 
-                                         /* SST interrupt locking/unlocking */
-// #define SST_INT_LOCK()   __disable_irq()
-// #define SST_INT_UNLOCK() __enable_irq()
-#define SST_INT_LOCK()
-#define SST_INT_UNLOCK()
-                                          /*SST End of Interrupt Command*/
+#include <libopencm3/cm3/cortex.h>
 
-                                               /* maximum SST task priority */
-#define SST_MAX_PRIO     8
+/* SST interrupt locking/unlocking */
+#define SST_INT_LOCK() cm_disable_interrupts()
+#define SST_INT_UNLOCK() cm_enable_interrupts()
+/*SST End of Interrupt Command*/
 
-#include "sst.h"                      /* SST platform-independent interface */
-
-void PendSV_Handler(void);
-
-#endif                                                        /* sst_port_h */
-
+#endif

@@ -3,7 +3,6 @@
 
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/gpio.h>
-/* #include <libopencm3/cm3/nvic.h> */
 #include <libopencm3/cm3/systick.h>
 
 #define SYSTICK_PERIOD 0.5  // 0.5s period
@@ -52,9 +51,7 @@ void SST_start(void) {
 
 /*....................................*/
 void SST_onIdle(void) {
-  //spare time
-  //do anithing you want
-  //but do not loop
+  //spare time : do anything you want but do not loop
   //you may want to post some events anyway
   //no time critical operations
 }
