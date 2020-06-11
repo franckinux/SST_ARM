@@ -7,7 +7,7 @@ CFILES += api.c
 CFILES += sst.c sst_port.c
 AFILES += api-asm.S
 
-CFLAGS += -DRCC_LED1=RCC_GPIOC -DPORT_LED1=GPIOC -DPIN_LED1=GPIO13
+CFLAGS +=
 LDFLAGS += -Wl,-Map,$(PROJECT).map
 
 # TODO - you will need to edit these two lines!
