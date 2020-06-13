@@ -19,7 +19,7 @@
 
 /* Public-scope objects ----------------------------------------------------*/
 uint8_t SST_currPrio_ = (uint8_t)0xFF;              /* current SST priority */
-uint8_t SST_readySet_ = (uint8_t)0;                        /* SST ready-set */
+uint32_t SST_readySet_ = (uint32_t)0;                        /* SST ready-set */
 
 typedef struct TaskCBTag TaskCB;
 struct TaskCBTag {
@@ -29,7 +29,7 @@ struct TaskCBTag {
     uint8_t head__;
     uint8_t tail__;
     uint8_t nUsed__;
-    uint8_t mask__;
+    uint32_t mask__;
 };
 
 /* Local-scope objects -----------------------------------------------------*/
@@ -110,28 +110,11 @@ void SST_mutexUnlock(uint8_t orgPrio) {
 /*..........................................................................*/
 /* NOTE: the SST scheduler is entered and exited with interrupts LOCKED */
 void SST_schedule_(void) {
-    static uint8_t const log2Lkup[] = {
-        0, 1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4,
-        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-        6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
-        6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
-        7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
-        7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
-        7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
-        7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
-        8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
-        8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
-        8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
-        8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
-        8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
-        8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
-        8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
-        8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
-    };
     uint8_t pin = SST_currPrio_;               /* save the initial priority */
     uint8_t p;                                          /* the new priority */
                             /* is the new priority higher than the initial? */
-    while ((p = log2Lkup[SST_readySet_]) > pin) {
+    /* while ((p = log2Lkup[SST_readySet_]) > pin) { */
+    while ((p = (SST_MAX_PRIO - __builtin_clz(SST_readySet_))) > pin) {
         TaskCB *tcb  = &l_taskCB[p - 1];
                                           /* get the event out of the queue */
         SSTEvent e = tcb->queue__[tcb->tail__];

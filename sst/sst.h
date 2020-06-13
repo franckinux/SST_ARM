@@ -19,7 +19,7 @@
 
 #include <stdint.h>                 /* exact-width integer types, ANSI C'99 */
 
-#define SST_MAX_PRIO 8  /* maximum SST task priority */
+#define SST_MAX_PRIO 32  /* maximum SST task priority */
 #define SST_ISR_BASE_PRIO (SST_MAX_PRIO + 1)  /* base SST isr task priority */
 
 typedef uint8_t SSTSignal;
@@ -67,6 +67,6 @@ void SST_schedule_(void);
 
 /* public-scope objects */
 extern uint8_t SST_currPrio_;     /* current priority of the executing task */
-extern uint8_t SST_readySet_;                              /* SST ready-set */
+extern uint32_t SST_readySet_;                              /* SST ready-set */
 
 #endif                                                             /* sst_h */
