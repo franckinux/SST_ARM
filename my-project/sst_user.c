@@ -20,7 +20,7 @@ void SST_init(void) {
 
   // CLOCK
   // Setup internal clock to 72MHz from 8Mhz external oscillator
-  rcc_clock_setup_in_hse_8mhz_out_72mhz();
+  rcc_clock_setup_pll(&rcc_hse_configs[RCC_CLOCK_HSE8_72MHZ]);
 
   // GPIO
   rcc_periph_clock_enable(RCC_GPIOC);
